@@ -32,5 +32,20 @@ public class BookService {
         return repository.findByTitle(title);
     }
 
+    public String deleteBook(int id){
+        repository.deleteById(id);
+        return "Book removed "+id;
+    }
+
+    public Book updateBook(Book book){
+        Book exitingBook = repository.findById(book.getId()).orElse(null);
+        assert exitingBook != null;
+        exitingBook.setTitle(book.getTitle());
+        exitingBook.setAuthor(book.getAuthor());
+        exitingBook.setDescription(book.getDescription());
+        exitingBook.setPrice(book.getPrice());
+        return repository.save(exitingBook);
+
+    }
 
 }
