@@ -21,5 +21,5 @@ public class Book {
     private String author;
     private String category;
     private String description;
-    private int price;
+    private double price;
 }
