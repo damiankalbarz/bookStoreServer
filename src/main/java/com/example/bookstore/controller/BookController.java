@@ -45,5 +45,16 @@ public class BookController {
         return service.updateBook(book);
     }
 
+    @PostMapping("/likeBook/{id}")
+    public void incrementLikeCount(@PathVariable int id){
+        service.incrementLikeCount(id);
+    }
+
+    @PostMapping("/hateBook/{id}")
+    public void hateBook(@PathVariable int id){
+        service.incrementHateBook(id);
+    }
+
+
 
 }

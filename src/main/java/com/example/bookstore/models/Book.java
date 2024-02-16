@@ -22,4 +22,7 @@ public class Book {
     private String category;
     private String description;
     private int price;
+    private int likeCount=0;
+    private int hateCount=0;
+
 }

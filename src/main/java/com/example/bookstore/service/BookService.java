@@ -4,7 +4,6 @@ import com.example.bookstore.models.Book;
 import com.example.bookstore.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -36,7 +35,6 @@ public class BookService {
         repository.deleteById(id);
         return "Book removed "+id;
     }
-
     public Book updateBook(Book book){
         Book exitingBook = repository.findById(book.getId()).orElse(null);
         assert exitingBook != null;
@@ -45,7 +43,17 @@ public class BookService {
         exitingBook.setDescription(book.getDescription());
         exitingBook.setPrice(book.getPrice());
         return repository.save(exitingBook);
-
     }
-
+    public void incrementLikeCount(int id){
+        Book exitingBook = repository.findById(id).orElse(null);
+        assert exitingBook != null;
+        exitingBook.setLikeCount(exitingBook.getLikeCount()+1);
+        repository.save(exitingBook);
+    }
+    public void incrementHateBook(int id){
+        Book exitingBook = repository.findById(id).orElse(null);
+        assert exitingBook != null;
+        exitingBook.setHateCount(exitingBook.getHateCount()+1);
+        repository.save(exitingBook);
+    }
 }
