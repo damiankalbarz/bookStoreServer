@@ -1,12 +1,11 @@
 package com.example.bookstore.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +21,12 @@ public class Book {
     private String category;
     private String description;
     private int price;
+    @Column(name = "likeCount", nullable = false, columnDefinition = "int default 0")
     private int likeCount=0;
+    @Column(name = "hateCount", nullable = false, columnDefinition = "int default 0")
     private int hateCount=0;
+
+    @OneToMany
+    private List<Comment> comments;
 
 }
