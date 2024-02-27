@@ -22,6 +22,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+
     @PostMapping("/add")
     public ResponseEntity<Comment> addComment(@RequestParam int bookId,  @RequestParam String content) {
         Comment addedComment = commentService.addComment(bookId, content);
@@ -39,6 +40,8 @@ public class CommentController {
         List<Comment> comments = commentService.getCommentsByBookId(bookId);
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }
+
+
 
 
 }

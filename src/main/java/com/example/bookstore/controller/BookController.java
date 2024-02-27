@@ -1,8 +1,11 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.models.Book;
+import com.example.bookstore.models.Comment;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,6 +56,12 @@ public class BookController {
     @PostMapping("/hateBook/{id}")
     public void hateBook(@PathVariable int id){
         service.incrementHateBook(id);
+    }
+
+    @PutMapping("/addComment/{id}")
+    public ResponseEntity<Book> addComment(@PathVariable int id, @RequestBody String comment){
+        Book updatedBook = service.addComment(id, comment);
+        return new ResponseEntity<>(updatedBook, HttpStatus.OK);
     }
 
 

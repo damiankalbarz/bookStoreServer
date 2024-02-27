@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -13,9 +14,10 @@ import java.util.List;
 @Entity
 @Table(name="BOOK_TBL")
 public class Book {
+    @Column(name = "book_id")
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String title;
     private String author;
     private String category;
@@ -26,7 +28,15 @@ public class Book {
     @Column(name = "hateCount", nullable = false, columnDefinition = "int default 0")
     private int hateCount=0;
 
-    @OneToMany
-    private List<Comment> comments;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    //@JoinColumn(name = "book_id")
+    private List<Comment> comments = new ArrayList<>();
+
+
+    public void addComments(Comment comment){
+        comment.setBook(this);
+        comments.add(comment);
+        //System.out.println("Added comment to book: " + comment);
+    }
 
 }

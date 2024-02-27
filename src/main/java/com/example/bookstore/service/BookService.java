@@ -1,10 +1,12 @@
 package com.example.bookstore.service;
 
 import com.example.bookstore.models.Book;
+import com.example.bookstore.models.Comment;
 import com.example.bookstore.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -23,7 +25,7 @@ public class BookService {
         return repository.findAll();
     }
 
-    public Book getBookById(int id){
+    public Book getBookById(Integer id){
         return repository.findById(id).orElse(null);
     }
 
@@ -55,5 +57,13 @@ public class BookService {
         assert exitingBook != null;
         exitingBook.setHateCount(exitingBook.getHateCount()+1);
         repository.save(exitingBook);
+    }
+
+    public Book addComment(Integer id, String commentText) {
+        Book existingBook = repository.findById(id).orElseThrow(() -> new RuntimeException("Książka o identyfikatorze: " + id + " nie została znaleziona"));
+        Comment comment = new Comment();
+        comment.setText(commentText);
+        existingBook.addComments(comment);
+        return repository.save(existingBook);
     }
 }
