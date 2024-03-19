@@ -42,6 +42,9 @@ public class User implements UserDetails {
     @OneToMany
     private List<UserBook> userBooks = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserBook> userComments = new ArrayList<>();
+
 
 
 

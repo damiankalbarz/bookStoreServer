@@ -35,7 +35,6 @@ public class UserService {
             existingUser.setUsername(user.getUsername());
             existingUser.setPassword(user.getPassword());
             existingUser.setRole(user.getRole());
-            // Dodaj inne pola do zaktualizowania
             userRepository.save(existingUser);
         });
     }

@@ -2,6 +2,7 @@ package com.example.bookstore.books.controller;
 
 import com.example.bookstore.books.models.Comment;
 import com.example.bookstore.books.service.CommentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class CommentController {
         return new ResponseEntity<>(addedComment, HttpStatus.CREATED);
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/all")
     public ResponseEntity<List<Comment>> getAllComments() {
         List<Comment> allComments = commentService.getAllComments();

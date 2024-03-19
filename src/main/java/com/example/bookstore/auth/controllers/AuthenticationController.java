@@ -4,6 +4,7 @@ package com.example.bookstore.auth.controllers;
 import com.example.bookstore.auth.models.AuthenticationResponse;
 import com.example.bookstore.auth.services.AuthenticationService;
 import com.example.bookstore.auth.models.User;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(authService.register(request));
     }
 
+    @Operation(security = {})
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(
             @RequestBody User request
